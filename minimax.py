@@ -49,7 +49,7 @@ class MiniMax():
                 if move_val > value:
                     value = move_val;
                     best = move;
-                state.pop();
+                self.state.pop();
             return best, value;
 
                 #INCOMPLETE
@@ -65,7 +65,7 @@ class MiniMax():
                 if move_val < value:
                     value = move_val;
                     catch = move;
-                state.pop();
+                self.state.pop();
             return catch, value;
 
           #INCOMPLETE
