@@ -15,55 +15,57 @@ class MiniMax():
 
     def getMove(state):    #Function to get move from algorithm, returns move to be pushed.
         self.state = state;
-        moves = [];        #List of valid moves.
-        alpha = -1000;     #Init alpha
-        beta = 1000;       #Init beta
         depth = 0;         #Init depth
         limit = self.limit; #Depth limit
         value = -1000;     #Init value
-        check = -1000;     #Variable to hold values to check against.
         best = '';         #Best move evaluated.
 
-        for i in state.legal_moves:  #Populates list of valid moves from board state.
-            vmoves.append(i);
 
-        for move in moves: #Cycles through and evaluates each possible move.
-            check = evaluate(state, move, depth, limit, alpha, beta, true);
-            if check > value:
-                value = check;
-                best = move;
+       best, value = evaluate(value, depth, limit, true); #Calls evaluate function and returns best move.
+       return best;
 
-        return best;
-       """
-       Undecided on if it would be better to cycle through possible available moves here in order to isolate
-       string of the best move, or to let the evaluate(function) do all of the work.
-       I am leaning towards the former because moves must be pushed in order to obtain and evaluate the next
-       player's moves so it seems easier to pass in the move to be pushed along with the state it will be
-       pushed on.
+    def legals(): #Helper function to get legal moves.
+        moves = []
+        for i in self.state.legal_moves:
+            moves.append(i);
 
-       # return = evaluate(moves, depth, limit, alpha, beta, true); #Calls evaluate function and returns best move.
-       """ 
-    def evaluate(state, move, depth, limit, alpha, beta, player):
-        if player: #Checks to see which player to evaluate.
-            value = checkMove(move); #Gets value of individual move. checkMove() function not yet created.
-            if depth == limit:    #Checks to ensure algorithm is within depth limit.   
-                return value;
-            else:
-                #Evaluate opponents moves in order to return the absolute value for the move passed in.
-                """
-                IN PROGRESS
+        return moves;
+       
+    def evaluate(value, depth, limit, player): #Function to find the best move.
+        catch = '';
+        best = '';
+        total = 0;
+        if depth == limit: #Checks to ensure limit is not reached.
+            return catch, total;
 
-                state.push(move);  #Pushes passed in move, to evaluate opponents next move.
-                for i in state.legal_moves:
-                    min_val = evaluate(
-                """
+        moves = legals(); #Gets a legal list of moves.
+
+        if player:
+            for move in moves:
+                move_val = checkMove(move); #Evaluates individual move. checkMove() does not exist.
+                self.state.push(move);
+                catch, total = evaluate(value, depth+1, limit, false);
+                move_val += total;
+                if move_val > value:
+                    value = move_val;
+                    best = move;
+                state.pop();
+            return best, value;
+
+                #INCOMPLETE
 
         else:
-            value = checkMove(move)
-            if value != 0:
-                value = -value; #Makes value negative if the move is not the player's move.
-            if depth == limit:
-                return value;
-            else:
-                #Evaluate opponents moves in order to return the absolute value for the move passed in.
-            
+            for move in moves:
+                move_val = checkMove(move);
+                if move_val != 0:
+                    move_val = -move_val;
+                self.state.push(move);
+                catch, total = evaluate(value, depth+1, limit, true);
+                move_val += total;
+                if move_val < value:
+                    value = move_val;
+                    catch = move;
+                state.pop();
+            return catch, value;
+
+          #INCOMPLETE
