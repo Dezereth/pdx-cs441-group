@@ -2,18 +2,17 @@
 import chess
 import numpy as np
 import random
+import time
 
 #implementation based on Pseuocode at https://www.geeksforgeeks.org/ml-monte-carlo-tree-search-mcts/
 class node:
-    def __init__(self, state, parent, is_root=False):
+    def __init__(self, state, parent, root=False, color=None):
         
         self.state = state
         self.parent = parent
-        self.turn = None
+        self.color = None
         self.children = []
-        self.is_root = is_root
-        
-        
+        self.is_root = root
         self.ucb = 0
         self.visited = False
         self.wins = 0
@@ -21,10 +20,10 @@ class node:
         self.is_terminal = False
 
         if not self.is_root:
-            if self.parent.turn == "me":
-                self.turn = "opp"
+            if self.parent == "white":
+                self.color == "black"
             else:
-                self.turn = "me"
+                self.color == "white"
 
         board = chess.Board(state)
         if board.is_game_over():
@@ -32,9 +31,10 @@ class node:
 
     def calc_ucb(self,constant):
         #calcualte the upper confidence bound for the node
-        if self.visits == 0:
-            self.ucb = 0
-        self.ucb = (self.wins/self.simulations) + constant*np.sqrt(np.log(self.parent.simulations)/self.simulations)
+        if self.parent.simulations == 0 or self.simulations == 0:
+            self.ucb = self.wins/self.simulations
+        else:
+            self.ucb = np.divide(self.wins,self.simulations) + constant * np.sqrt(np.divide(np.log(self.parent.simulations), self.simulations))
         
     def expand_children(self):
         if self.is_terminal:
@@ -54,33 +54,42 @@ class node:
 
 
 class MonteCarlo():
-    def __init__(self, color):
+    def __init__(self, ucn_constant):
         print("Monte-Carlo placeholder")
         self.root = None
-        self.color = None
-        
-    def search(self, starting_state, time_limit):
+        self.ucb_constant = ucn_constant
+
+
+    def search(self, starting_state, time_limit, color):
         #main alogirithm, begins a search from a starting state giben a time limit
-        self.root = node(starting_state, None, is_root=True)
-        self.root.turn == "me"
+        self.root = node(starting_state, None, root=True, color = color)
         self.root.expand_children()
         #loop until time expires
-        while time_limit:
+        count = 0
+        end = time.time()+time_limit
+        while time.time()<=end:
             #select a leaf
             leaf = self.select_child(self.root)
             #simulate until an end condition
             sim_result = self.simulation(leaf)
             #back propogate the results up to the orginal starting node
-            backprop(leaf, sim_result)
+            self.backprop(leaf, sim_result)
+            count += 1
+        print(f"Looped {count} times")
         #once time is up, return the the child node with the greatest evaluation based on the upper confidence bound
-        return max(child.vists for child in self.root.children)
+        for child in self.root.children:
+            print(f"{child.wins} out of {child.simulations} for {child.state}") #max(child.simulations for child in self.root.children)
         
     def select_child(self, node):
-        #finds a leaf node
+        #finds a leaf node - will first pick unvisited nodes, then switch to to highest UCB value 
         while self.fully_epanded(node):
             for child in node.children:
-                child.calc_ucb()
-            node = max(child.ucb for child in node.children)
+                child.calc_ucb(self.ucb_constant)
+            max_ucb = -100
+            for child in node.children:
+                if child.ucb > max_ucb:
+                    max_node = child
+            node = max_node
         if node.is_terminal:
         #if a terminal node, return self    
             return node
@@ -97,18 +106,39 @@ class MonteCarlo():
             if node.children == []:
                 node.expand_children()
             node = random.choice(node.children)
-            
         board = chess.Board(node.state)
         result = board.result()
         return ((node, result))
 
-    def backprop(result):
+    def backprop(self, leaf, result):
         ##not sure how to implement, don't know yet how to interpret results from game
+        node = result[0]
+        resul = result[1]
         while True:
             if node.is_root:
-                return
-            
+                break
+            self.update_state(node, resul)
+            node = node.parent
 
+    def update_state(self, node, result):
+        node.simulations += 1
+        [white,black] = result.split("-")
+        if white == black:
+            node.wins += .5
+            return
+        if node.color == 'white':
+            if white == '1':
+                node.wins += 1
+            else:
+                node.wins += -1
+        elif node.color == 'black':
+            if black == '1':
+                node.wins += 1
+            else:
+                node.wins += -1
+
+        
+        
 
 
     def fully_epanded(self, node):
@@ -121,7 +151,7 @@ class MonteCarlo():
         return True
 
 if __name__== '__main__':
-    agent = MonteCarlo("white")
+    agent = MonteCarlo(10)
 
-    agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1", 10)
+    agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1", 30, "white")
 
