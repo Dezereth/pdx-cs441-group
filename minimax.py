@@ -17,11 +17,11 @@ class MiniMax():
         self.state = state;
         depth = 0;         #Init depth
         limit = self.limit; #Depth limit
-        value = -1000;     #Init value
+        #value = -1000;     #Init value
         best = '';         #Best move evaluated.
 
 
-       best, value = evaluate(value, depth, limit, true); #Calls evaluate function and returns best move.
+       best, value = evaluate(depth, limit, true); #Calls evaluate function and returns best move.
        return best;
 
     def legals(): #Helper function to get legal moves.
@@ -31,7 +31,7 @@ class MiniMax():
 
         return moves;
        
-    def evaluate(value, depth, limit, player): #Function to find the best move.
+    def evaluate(depth, limit, player): #Function to find the best move.
         catch = '';
         best = '';
         total = 0;
@@ -41,10 +41,11 @@ class MiniMax():
         moves = legals(); #Gets a legal list of moves.
 
         if player:
+            value = -1000;
             for move in moves:
                 move_val = checkMove(move); #Evaluates individual move. checkMove() does not exist.
                 self.state.push(move);
-                catch, total = evaluate(value, depth+1, limit, false);
+                catch, total = evaluate(depth+1, limit, false);
                 move_val += total;
                 if move_val > value:
                     value = move_val;
@@ -55,12 +56,13 @@ class MiniMax():
                 #INCOMPLETE
 
         else:
+            value = 1000;
             for move in moves:
                 move_val = checkMove(move);
                 if move_val != 0:
                     move_val = -move_val;
                 self.state.push(move);
-                catch, total = evaluate(value, depth+1, limit, true);
+                catch, total = evaluate(depth+1, limit, true);
                 move_val += total;
                 if move_val < value:
                     value = move_val;
