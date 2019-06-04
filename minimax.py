@@ -31,7 +31,7 @@ class MiniMax():
 
         return moves;
        
-    def evaluate(depth, limit, player): #Function to find the best move.
+    def evaluate(depth, limit, player, alpha, beta): #Function to find the best move.
         catch = '';
         best = '';
         total = 0;
@@ -65,7 +65,7 @@ class MiniMax():
                 if move_val != 0:
                     move_val = -move_val;
                 self.state.push(move);
-                catch, total = evaluate(depth+1, limit, true);
+                catch, total = evaluate(depth+1, limit, true, alpha, beta);
                 move_val += total;
                 beta = min(move_val, beta);
                 if move_val < value:
