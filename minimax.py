@@ -17,11 +17,11 @@ class MiniMax():
         self.state = state;
         depth = 0;         #Init depth
         limit = self.limit; #Depth limit
-        #value = -1000;     #Init value
         best = '';         #Best move evaluated.
+        alpha = -1000;   
+        beta = 1000;
 
-
-       best, value = evaluate(depth, limit, true); #Calls evaluate function and returns best move.
+       best, value = evaluate(depth, limit, true, alpha, beta); #Calls evaluate function and returns best move.
        return best;
 
     def legals(): #Helper function to get legal moves.
@@ -45,12 +45,15 @@ class MiniMax():
             for move in moves:
                 move_val = checkMove(move); #Evaluates individual move. checkMove() does not exist.
                 self.state.push(move);
-                catch, total = evaluate(depth+1, limit, false);
+                catch, total = evaluate(depth+1, limit, false, alpha, beta);
                 move_val += total;
+                alpha = max(move_val, alpha);
                 if move_val > value:
                     value = move_val;
                     best = move;
                 self.state.pop();
+                if beta <= alpha:
+                    break;
             return best, value;
 
                 #INCOMPLETE
@@ -64,10 +67,13 @@ class MiniMax():
                 self.state.push(move);
                 catch, total = evaluate(depth+1, limit, true);
                 move_val += total;
+                beta = min(move_val, beta);
                 if move_val < value:
                     value = move_val;
                     catch = move;
                 self.state.pop();
+                if beta <= alpha:
+                    break
             return catch, value;
 
           #INCOMPLETE
