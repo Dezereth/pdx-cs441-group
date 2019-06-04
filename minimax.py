@@ -17,11 +17,11 @@ class MiniMax():
         self.state = state;
         depth = 0;         #Init depth
         limit = self.limit; #Depth limit
-        value = -1000;     #Init value
         best = '';         #Best move evaluated.
+        alpha = -1000;   
+        beta = 1000;
 
-
-       best, value = evaluate(value, depth, limit, true); #Calls evaluate function and returns best move.
+       best, value = evaluate(depth, limit, true, alpha, beta); #Calls evaluate function and returns best move.
        return best;
 
     def legals(): #Helper function to get legal moves.
@@ -31,7 +31,7 @@ class MiniMax():
 
         return moves;
        
-    def evaluate(value, depth, limit, player): #Function to find the best move.
+    def evaluate(depth, limit, player, alpha, beta): #Function to find the best move.
         catch = '';
         best = '';
         total = 0;
@@ -41,31 +41,39 @@ class MiniMax():
         moves = legals(); #Gets a legal list of moves.
 
         if player:
+            value = -1000;
             for move in moves:
                 move_val = checkMove(move); #Evaluates individual move. checkMove() does not exist.
                 self.state.push(move);
-                catch, total = evaluate(value, depth+1, limit, false);
+                catch, total = evaluate(depth+1, limit, false, alpha, beta);
                 move_val += total;
+                alpha = max(move_val, alpha);
                 if move_val > value:
                     value = move_val;
                     best = move;
                 self.state.pop();
+                if beta <= alpha:
+                    break;
             return best, value;
 
                 #INCOMPLETE
 
         else:
+            value = 1000;
             for move in moves:
                 move_val = checkMove(move);
                 if move_val != 0:
                     move_val = -move_val;
                 self.state.push(move);
-                catch, total = evaluate(value, depth+1, limit, true);
+                catch, total = evaluate(depth+1, limit, true, alpha, beta);
                 move_val += total;
+                beta = min(move_val, beta);
                 if move_val < value:
                     value = move_val;
                     catch = move;
                 self.state.pop();
+                if beta <= alpha:
+                    break
             return catch, value;
 
           #INCOMPLETE
