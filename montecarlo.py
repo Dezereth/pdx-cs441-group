@@ -17,7 +17,7 @@ class node:
         self.is_root = root
         self.ucb = 0
         self.visited = False
-        self.wins = 0
+        self.wins = 0.0
         self.simulations = 0
         self.is_terminal = False
         self.move = move
@@ -141,7 +141,28 @@ class MonteCarlo():
     def evaluate_board_state(self, node):
     #need board state evaluation function
     #not implemented
-        return "1/2-1/2"
+        whiteDict = {'P':1,
+                     'N':3,
+                     'B':3,
+                     'R':5,
+                     'Q':9,
+                     'K':90
+                     }
+        blackDict = {'p':1,
+                     'n':3,
+                     'b':3,
+                     'r':5,
+                     'q':9,
+                     'k':90
+                     }
+        whitePoints = 0.0
+        blackPoints = 0.0
+        for char in node.state.split()[0]:
+            whitePoints += whiteDict.get(char,0)
+            blackPoints += blackDict.get(char,0)
+        whiteScore = whitePoints/(whitePoints+blackPoints)
+        blackScore = 1-whiteScore
+        return f"{whiteScore}-{blackScore}"
 
 
     def backprop(self, leaf, result):
@@ -155,6 +176,7 @@ class MonteCarlo():
             node = node.parent
 
     def update_state(self, node, result):
+        #print(result)
         node.simulations += 1
         [white,black] = result.split("-")
         if white == black:
@@ -163,13 +185,17 @@ class MonteCarlo():
         if node.color == 'white':
             if white == '1':
                 node.wins += 1
-            else:
+            elif white == '0':
                 node.wins += -1
+            else:
+                node.wins += float(white)
         elif node.color == 'black':
             if black == '1':
                 node.wins += 1
-            else:
+            elif black == '0':
                 node.wins += -1
+            else:
+                node.wins += float(black)
 
     def fully_epanded(self, node):
         #check if all chidlren have been visited
@@ -183,5 +209,5 @@ class MonteCarlo():
 if __name__== '__main__':
     agent = MonteCarlo(1)
 
-    agent.search('4k3/8/8/8/8/8/8/1R1K1R2 w - - 6 4',60,"white")
+    agent.search('4k3/8/8/8/8/8/8/1R1K1R2 w - - 6 4',30,"white")
 
