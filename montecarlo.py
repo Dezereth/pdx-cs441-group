@@ -25,9 +25,9 @@ class node:
 
         if not self.is_root:
             if self.parent == "white":
-                self.color == "black"
+                self.color = "black"
             else:
-                self.color == "white"
+                self.color = "white"
             self.depth = self.parent.depth + 1
 
         board = chess.Board(state)
@@ -76,7 +76,7 @@ class MonteCarlo():
         end = time.time()+time_limit
         depth_plot = []
         while time.time()<=end:
-            if count % 10 == 0:
+            if count % 15 == 0:
                 self.epsilon -= .1
             #select a leaf
             leaf = self.select_child(self.root)
@@ -173,7 +173,7 @@ class MonteCarlo():
 
     def fully_epanded(self, node):
         #check if all chidlren have been visited
-        if node.children == None:
+        if node.children == []:
             return False
         for child in node.children:
             if child.visited == False:
@@ -183,5 +183,7 @@ class MonteCarlo():
 if __name__== '__main__':
     agent = MonteCarlo(1)
 
-    agent.search('4k3/8/8/8/8/8/8/1R1K1R2 w - - 6 4',60,"white")
+    agent.search('2rkr3/8/8/8/8/8/8/2RKR3 w - - 10 2',60,"white")
+
+
 
