@@ -13,7 +13,7 @@ import chess
 #%%
 
 class MiniMax():
-    def __init__(self, state, limit):
+    def __init__(self, state=chess.Board(), limit=6):
         self.state = state;
         self.limit = limit;
 
@@ -65,7 +65,7 @@ class MiniMax():
             value = 1000;
             for move in moves:
                 self.state.push(move);
-                move_val = self.checkMove(str(self.state), self.state.turn)
+                move_val = self.checkMove(self.state, self.state.turn)
                 move_val = -move_val;
                 catch, total = self.evaluate(depth+1, limit, True, alpha, beta);
                 move_val += total;
@@ -98,7 +98,22 @@ class MiniMax():
                        'k':-90
                       }
           points = 0
-          for char in state:
+          if state.game_is_over(): #Checking for draw or checkmate
+              result = state.result()
+              [white,black] = result.split('-')
+              if white == black: #Game is a draw
+                  return 0
+              if white == '1': #White won
+                  if turn: #And is white's turn/state
+                      return whiteDict['K'] * 3
+                  else: #And is black's turn/state
+                      return whiteDict['k'] * 3
+              else: #Black won
+                  if not turn: #And is black's turn/state
+                      return -whiteDict['k'] * 3
+                  else: #And is white's turn/state
+                      return -whiteDict['K'] * 3
+          for char in str(state):
             points += whiteDict.get(char, 0)
           if not turn:
             points *= -1

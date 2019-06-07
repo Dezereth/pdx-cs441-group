@@ -60,7 +60,7 @@ class node:
 
 
 class MonteCarlo():
-    def __init__(self, ucb_constant):
+    def __init__(self, ucb_constant=1):
         print("Monte-Carlo placeholder")
         self.root = None
         self.ucb_constant = ucb_constant
@@ -77,7 +77,7 @@ class MonteCarlo():
         depth_plot = []
         while time.time()<=end:
             if count % 10 == 0:
-                self.epsilon -= .1
+                self.epsilon -= .2
             #select a leaf
             leaf = self.select_child(self.root)
             depth_plot.append(leaf.depth)
@@ -99,6 +99,7 @@ class MonteCarlo():
         print(f"The current best move is {best_move}")
         plt.plot(depth_plot)
         plt.show()
+        return best_move
 
     def select_child(self, node):
         #finds a leaf node - will first pick unvisited nodes, then switch to to highest UCB value 
