@@ -35,11 +35,11 @@ class MiniMax():
         return moves
        
     def evaluate(self, depth, limit, player, alpha, beta): #Function to find the best move.
-        catch = '';
-        best = '';
-        total = 0;
+        catch = ''
+        best = ''
+        total = 0
         if depth == limit: #Checks to ensure limit is not reached.
-            return catch, total;
+            return catch, total
 
         moves = self.legals(); #Gets a legal list of moves.
 
@@ -47,36 +47,36 @@ class MiniMax():
             value = -1000;
             for move in moves:
                 self.state.push(move);
-                move_val = self.checkMove(str(self.state), self.state.turn); #Evaluates individual move. checkMove() does not exist.
-                catch, total = self.evaluate(depth+1, limit, False, alpha, beta);
-                move_val += total;
-                alpha = max(move_val, alpha);
+                move_val = self.checkMove(self.state, self.state.turn) #Evaluates individual move. checkMove() does not exist.
+                catch, total = self.evaluate(depth+1, limit, False, alpha, beta)
+                move_val += total
+                alpha = max(move_val, alpha)
                 if move_val > value:
-                    value = move_val;
+                    value = move_val
                     best = move;
-                self.state.pop();
+                self.state.pop()
                 if beta <= alpha:
-                    break;
-            return best, value;
+                    break
+            return best, value
 
                 #INCOMPLETE
 
         else:
             value = 1000;
             for move in moves:
-                self.state.push(move);
+                self.state.push(move)
                 move_val = self.checkMove(self.state, self.state.turn)
-                move_val = -move_val;
-                catch, total = self.evaluate(depth+1, limit, True, alpha, beta);
-                move_val += total;
-                beta = min(move_val, beta);
+                move_val = -move_val
+                catch, total = self.evaluate(depth+1, limit, True, alpha, beta)
+                move_val += total
+                beta = min(move_val, beta)
                 if move_val < value:
-                    value = move_val;
-                    catch = move;
-                self.state.pop();
+                    value = move_val
+                    catch = move
+                self.state.pop()
                 if beta <= alpha:
                     break
-            return catch, value;
+            return catch, value
 
     def checkMove(self, state, turn):
           """
@@ -98,7 +98,7 @@ class MiniMax():
                        'k':-90
                       }
           points = 0
-          if state.game_is_over(): #Checking for draw or checkmate
+          if state.is_game_over(): #Checking for draw or checkmate
               result = state.result()
               [white,black] = result.split('-')
               if white == black: #Game is a draw

@@ -123,7 +123,7 @@ class MonteCarlo():
         #Opponents moves are also chosen randomly
         #Simulation only allo
         count = 0
-        while not node.is_terminal and count < 10/self.epsilon:
+        while not node.is_terminal and count < 5/self.epsilon:
             if node.children == []:
                 node.expand_children()
             if random.random() < self.epsilon:
@@ -181,6 +181,8 @@ class MonteCarlo():
         #print(result)
         node.simulations += 1
         [white,black] = result.split("-")
+        if node.state == '6r1/7K/8/k1p5/8/8/5P2/8 w - - 0 2':
+            print(result)
         if white == black:
             node.wins += .5
             return
@@ -210,6 +212,7 @@ class MonteCarlo():
 
 if __name__== '__main__':
     agent = MonteCarlo(1)
-    agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
+    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',30,"black")
+    #agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
     #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',60,"white")
 
