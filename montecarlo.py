@@ -76,8 +76,9 @@ class MonteCarlo():
         end = time.time()+time_limit
         depth_plot = []
         while time.time()<=end:
-            if count % 15 == 0:
-                self.epsilon -= .1
+            if count % 40 == 0:
+                if self.epsilon > 0.1:
+                    self.epsilon -= .1
             #select a leaf
             leaf = self.select_child(self.root)
             depth_plot.append(leaf.depth)
@@ -89,7 +90,7 @@ class MonteCarlo():
         print(f"Looped {count} times")
         #once time is up, return the the child node with the greatest evaluation based on the upper confidence bound
         for child in self.root.children:
-            print(f"{child.wins} out of {child.simulations} for {child.state}") #max(child.simulations for child in self.root.children)
+            print("{0:.4f}%: {1:.4f} out of {2} for {3}".format((100*child.wins/child.simulations), child.wins, child.simulations, child.state)) #max(child.simulations for child in self.root.children)
         mx = -100
         best_move = None
         for child in self.root.children:
@@ -122,7 +123,7 @@ class MonteCarlo():
         #Opponents moves are also chosen randomly
         #Simulation only allo
         count = 0
-        while not node.is_terminal and count < 40:
+        while not node.is_terminal and count < 10/self.epsilon:
             if node.children == []:
                 node.expand_children()
             if random.random() < self.epsilon:
@@ -185,16 +186,16 @@ class MonteCarlo():
             return
         if node.color == 'white':
             if white == '1':
-                node.wins += 1
+                node.wins += 3
             elif white == '0':
-                node.wins += -1
+                node.wins += -3
             else:
                 node.wins += float(white)
         elif node.color == 'black':
             if black == '1':
-                node.wins += 1
+                node.wins += 3
             elif black == '0':
-                node.wins += -1
+                node.wins += -3
             else:
                 node.wins += float(black)
 
@@ -209,6 +210,6 @@ class MonteCarlo():
 
 if __name__== '__main__':
     agent = MonteCarlo(1)
-
-    agent.search('4k3/8/8/8/8/8/8/1R1K1R2 w - - 6 4',30,"white")
+    agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
+    #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',60,"white")
 
