@@ -28,7 +28,7 @@ class Handler():
         self.board = board.copy()
         self.starting = board.copy()
     
-    def moveMonte(self, time=30):
+    def moveMonte(self, time=25):
         """
         Queries the MonteCarlo search for the best move on the current board.
         catches and pushes move, updating the board.
@@ -180,10 +180,10 @@ class Handler():
 
 def main():
     monte = montecarlo.MonteCarlo()
-    minim = minimax.MiniMax()
+    minim = minimax.MiniMax(limit=5)
     
     handy = Handler(mini=minim, monte=monte, board=chess.Board('8/8/2kr4/2p5/5P2/4RK2/8/8 w - - 0 1'))
-    handy.miniVmonte()
+    handy.miniVmonte(maxTurns=15)
 #%%
 def pgnTest():
         game = chess.pgn.Game()
