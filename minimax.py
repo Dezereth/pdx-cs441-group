@@ -9,6 +9,7 @@ IMPLEMENTATION INCOMPLETE AND WILL NOT RUN CURRENTLY.
 """
 
 import chess
+import random
 
 #%%
 
@@ -53,7 +54,7 @@ class MiniMax():
                 alpha = max(move_val, alpha)
                 if move_val > value:
                     value = move_val
-                    best = move;
+                    best = move
                 self.state.pop()
                 if beta <= alpha:
                     break
@@ -79,43 +80,44 @@ class MiniMax():
             return catch, value
 
     def checkMove(self, state, turn):
-          """
-          <state> = str(board)
-          <turn> = board.turn
-          """
+        """
+        <state> = str(board)
+        <turn> = board.turn
+        """
           
-          whiteDict = {'P':1,
-                       'p':-1,
-                       'N':3,
-                       'n':-3,
-                       'B':3,
-                       'b':-3,
-                       'R':5,
-                       'r':-5,
-                       'Q':9,
-                       'q':-9,
-                       'K':90,
-                       'k':-90
+        whiteDict = {'P':1,
+                     'p':-1,
+                     'N':3,
+                     'n':-3,
+                     'B':3,
+                     'b':-3,
+                     'R':5,
+                     'r':-5,
+                     'Q':9,
+                     'q':-9,
+                     'K':90,
+                     'k':-90
                       }
-          points = 0
-          if state.is_game_over(): #Checking for draw or checkmate
-              result = state.result()
-              [white,black] = result.split('-')
-              if white == black: #Game is a draw
-                  return 0
-              if white == '1': #White won
-                  if turn: #And is white's turn/state
-                      return whiteDict['K'] * 3
-                  else: #And is black's turn/state
-                      return whiteDict['k'] * 3
-              else: #Black won
-                  if not turn: #And is black's turn/state
-                      return -whiteDict['k'] * 3
-                  else: #And is white's turn/state
-                      return -whiteDict['K'] * 3
-          for char in str(state):
+        points = 0
+        if state.is_game_over(): #Checking for draw or checkmate
+            result = state.result()
+            [white,black] = result.split('-')
+            if white == black: #Game is a draw
+                return 0
+            if white == '1': #White won
+                if turn: #And is white's turn/state
+                    return whiteDict['K'] * 3
+                else: #And is black's turn/state
+                    return whiteDict['k'] * 3
+            else: #Black won
+                if not turn: #And is black's turn/state
+                    return -whiteDict['k'] * 3
+                else: #And is white's turn/state
+                    return -whiteDict['K'] * 3
+        for char in str(state):
             points += whiteDict.get(char, 0)
-          if not turn:
+        if turn:
             points *= -1
-          return points
+        #print(points)
+        return points
           #INCOMPLETE
