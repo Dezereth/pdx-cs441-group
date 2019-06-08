@@ -216,11 +216,49 @@ class miniEvaluator():
 
 def main():
     monte = montecarlo.MonteCarlo()
-    minim = minimax.MiniMax(limit=5)
-    
-    
-    handy = Handler(mini=minim, monte=monte, board=chess.Board('8/8/2kr4/2p5/5P2/4RK2/8/8 w - - 0 1'))
-    handy.miniVmonte(maxTurns=15)
+    minim = minimax.MiniMax(limit=6)
+
+#King-Rook-Pawn game
+    #boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
+    #handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
+    #handy.adjMonte(time=120)
+    #handy.miniVmonte(maxTurns=25, rounds=5)
+    #handy.monteVmini(maxTurns=25, rounds=5)
+
+#King-Rook-Rook game
+    boardKRR=chess.Board('rkr5/8/8/8/8/8/8/5RKR w - - 0 1')
+    handy = Handler(mini=minim, monte=monte, board=boardKRR.copy())
+    handy.adjMonte(time=120)
+    handy.miniVmonte(maxTurns=25, rounds=5, event="Mini vs Monte RKR")
+    #handy.monteVmini(maxTurns=25, rounds=5, event="Monte vs Mini RKR")
+
+#Regular game
+    #board=chess.Board()
+    #handy = Handler(mini=minim, monte=monte, board=board.copy())
+    #handy.adjMonte(time=120)
+    #handy.miniVmonte(maxTurns=75, rounds=1)
+    #handy.monteVmini(maxTurns=75, rounds=1)
+
+#Hunter games
+"""
+    boardHunt1=chess.Board('2k5/8/8/8/8/8/8/R2K3R w - - 0 1')
+    boardHunt2=chess.Board('2k5/8/8/8/8/8/8/B2K3R w - - 0 1')
+    boardHunt3=chess.Board('2k5/8/8/8/8/8/8/B2K3N w - - 0 1')
+    handy = Handler(mini=minim, monte=monte, board=boardHunt1.copy())
+    handy.adjMonte(time=120)
+    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte 2R Hunt")
+    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini 2R Hunt")
+    handy.starting = boardHunt2.copy()
+    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BR Hunt")
+    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BR Hunt")
+    handy.starting = boardHunt3.copy()
+    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BN Hunt")
+    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BN Hunt")
+"""
+
+    #me = miniEvaluator()
+    #me.evaluate(depth=7, trials=1)
+
 #%%
 def pgnTest():
         game = chess.pgn.Game()
