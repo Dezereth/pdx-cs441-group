@@ -33,6 +33,7 @@ class MiniMax():
         moves = []
         for i in self.state.legal_moves:
             moves.append(i)
+        random.shuffle(moves)
         return moves
        
     def evaluate(self, depth, limit, player, alpha, beta): #Function to find the best move.
