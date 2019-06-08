@@ -12,7 +12,7 @@ class node:
         
         self.state = state
         self.parent = parent
-        self.color = None
+        self.color = color
         self.children = []
         self.is_root = root
         self.ucb = 0
@@ -24,7 +24,7 @@ class node:
         self.depth = 0
 
         if not self.is_root:
-            if self.parent == "white":
+            if self.parent.color == "white":
                 self.color = "black"
             else:
                 self.color = "white"
@@ -64,11 +64,16 @@ class MonteCarlo():
         print("Monte-Carlo placeholder")
         self.root = None
         self.ucb_constant = ucb_constant
-        self.epsilon = .9
-
+        self.eps = 0.9
+        self.epsilon = self.eps
+        
+    def reset(self):
+        self.root = None
+        self.epsilon = self.eps
 
     def search(self, starting_state, time_limit, color):
-        #main alogirithm, begins a search from a starting state giben a time limit
+        #main alogirithm, begins a search from a starting state given a time limit
+        self.epsilon = 0.9
         self.root = node(starting_state, None, root=True, color = color)
         self.root.expand_children()
         #loop until time expires
@@ -123,7 +128,7 @@ class MonteCarlo():
         #Opponents moves are also chosen randomly
         #Simulation only allo
         count = 0
-        while not node.is_terminal and count < 5/self.epsilon:
+        while not node.is_terminal and count < 10/self.epsilon:
             if node.children == []:
                 node.expand_children()
             if random.random() < self.epsilon:
@@ -188,18 +193,18 @@ class MonteCarlo():
             return
         if node.color == 'white':
             if white == '1':
-                node.wins += 3
+                node.wins -= 3
             elif white == '0':
-                node.wins += -3
-            else:
-                node.wins += float(white)
-        elif node.color == 'black':
-            if black == '1':
                 node.wins += 3
-            elif black == '0':
-                node.wins += -3
             else:
                 node.wins += float(black)
+        elif node.color == 'black':
+            if black == '1':
+                node.wins -= 3
+            elif black == '0':
+                node.wins += 3
+            else:
+                node.wins += float(white)
 
     def fully_epanded(self, node):
         #check if all chidlren have been visited
@@ -212,7 +217,11 @@ class MonteCarlo():
 
 if __name__== '__main__':
     agent = MonteCarlo(1)
-    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',30,"black")
+    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black")
+    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white")
+    #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',5,"black")
+    #agent.epsilon=0.9
+    #agent.search('4k3/R7/8/8/7R/8/8/4K3 w - - 0 1',5,"white")
     #agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
-    #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',60,"white")
+    #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',20,"white")
 
