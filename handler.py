@@ -27,14 +27,21 @@ class Handler():
         self.mini = mini
         self.board = board.copy()
         self.starting = board.copy()
+        self.time = 30
+        
+    def adjMini(self, limit):
+        self.mini.limit = limit
     
-    def moveMonte(self, time=25):
+    def adjMonte(self, time):
+        self.time = time
+    
+    def moveMonte(self):
         """
         Queries the MonteCarlo search for the best move on the current board.
         catches and pushes move, updating the board.
         """
         #search(self, starting_state, time_limit, color):
-        catch = self.monte.search(starting_state=self.board.fen(), time_limit=time, color='white' if self.board.turn else 'black')
+        catch = self.monte.search(starting_state=self.board.fen(), time_limit=self.time, color='white' if self.board.turn else 'black')
         self.board.push_san(catch)
         catch = self.board.pop()
         self.board.push(catch)
@@ -49,7 +56,7 @@ class Handler():
         self.board.push(catch)
         return catch
     
-    def miniVmonte(self, maxTurns=30, rounds=1):
+    def miniVmonte(self, maxTurns=30, rounds=1, event="mini vs monte"):
         """
         Starts a competetive game between Mini and Monte, with Mini moving first
         """
@@ -58,6 +65,8 @@ class Handler():
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
+            game.headers["Event"]=event
+            game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="MiniMax"
             game.headers["Black"]="Montecarlo"
             game.headers["Round"]=rnd+1
@@ -81,7 +90,7 @@ class Handler():
             games.append(game)
         return games
 
-    def monteVmini(self, maxTurns=30, rounds=1):
+    def monteVmini(self, maxTurns=30, rounds=1, event="monte vs mini"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
@@ -90,6 +99,8 @@ class Handler():
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
+            game.headers["Event"]=event
+            game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="Montecarlo"
             game.headers["Black"]="MiniMax"
             game.headers["Round"]=rounds
@@ -113,7 +124,7 @@ class Handler():
             games.append(game)
         return games
     
-    def miniVmini(self, maxTurns=30, rounds=1):
+    def miniVmini(self, maxTurns=30, rounds=1, event="mini vs mini"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
@@ -122,6 +133,8 @@ class Handler():
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
+            game.headers["Event"]=event
+            game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="MiniMax"
             game.headers["Black"]="MiniMax"
             game.headers["Round"]=rounds
@@ -145,7 +158,7 @@ class Handler():
             games.append(game)
         return games
     
-    def monteVmonte(self, maxTurns=30, rounds=1):
+    def monteVmonte(self, maxTurns=30, rounds=1, event="monte vs monte"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
@@ -154,6 +167,8 @@ class Handler():
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
+            game.headers["Event"]=event
+            game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="MonteCarlo"
             game.headers["Black"]="Montecarlo"
             game.headers["Round"]=rounds
@@ -176,11 +191,39 @@ class Handler():
             print(game, file=open(fileStr, "a+"), end="\n\n")
             games.append(game)
         return games
-        
+
+#%%
+
+class miniEvaluator():
+    def __init__(self, mini=minimax.MiniMax(), board=chess.Board()):
+        self.mini = mini
+        self.board = board.copy()
+        self.starting = board.copy()
+    
+    def evaluate(self, depth=8, trials=1):
+        bigStats = []
+        fileStr = "MiniEvaluator_D"+str(depth)+"T"+str(trials)+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".txt"
+        for i in range(trials):
+            stats = []
+            for i in range(1,depth+1):
+                self.mini.limit = i
+                start = datetime.datetime.now()
+                catch = self.mini.getMove(self.board.copy())
+                end = datetime.datetime.now()
+                diff = end-start
+                stats.append( (i, diff.total_seconds()) )
+            bigStats.append(stats)
+        with open(fileStr, 'w') as f:
+            for l in bigStats:
+                f.write("%s\n" % l)
+        return bigStats
+
+#%%
 
 def main():
     monte = montecarlo.MonteCarlo()
     minim = minimax.MiniMax(limit=5)
+    
     
     handy = Handler(mini=minim, monte=monte, board=chess.Board('8/8/2kr4/2p5/5P2/4RK2/8/8 w - - 0 1'))
     handy.miniVmonte(maxTurns=15)
