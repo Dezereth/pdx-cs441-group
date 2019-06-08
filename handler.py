@@ -78,12 +78,10 @@ class Handler():
                 if self.board.is_game_over():
                     break
                 catch = self.moveMini()
-                #print(catch)
                 node = node.add_variation(catch)
                 if self.board.is_game_over():
                     break
                 catch = self.moveMonte()
-                #print(catch)
                 node = node.add_variation(catch)
                 turns += 1
             print(game, file=open(fileStr, "a+"), end="\n\n")
@@ -112,12 +110,10 @@ class Handler():
                 if self.board.is_game_over():
                     break
                 catch = self.moveMonte()
-                print(catch)
                 node = node.add_variation(catch)
                 if self.board.is_game_over():
                     break
                 catch = self.moveMini()
-                print(catch)
                 node = node.add_variation(catch)
                 turns += 1
             print(game, file=open(fileStr, "a+"), end="\n\n")
@@ -146,12 +142,10 @@ class Handler():
                 if self.board.is_game_over():
                     break
                 catch = self.moveMini()
-                print(catch)
                 node = node.add_variation(catch)
                 if self.board.is_game_over():
                     break
                 catch = self.moveMini()
-                print(catch)
                 node = node.add_variation(catch)
                 turns += 1
             print(game, file=open(fileStr, "a+"), end="\n\n")
@@ -180,12 +174,10 @@ class Handler():
                 if self.board.is_game_over():
                     break
                 catch = self.moveMonte()
-                print(catch)
                 node = node.add_variation(catch)
                 if self.board.is_game_over():
                     break
-                catch = self.moveMini()
-                print(catch)
+                catch = self.moveMonte()
                 node = node.add_variation(catch)
                 turns += 1
             print(game, file=open(fileStr, "a+"), end="\n\n")
@@ -203,9 +195,11 @@ class miniEvaluator():
     def evaluate(self, depth=8, trials=1):
         bigStats = []
         fileStr = "MiniEvaluator_D"+str(depth)+"T"+str(trials)+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".txt"
-        for i in range(trials):
+        for j in range(trials):
             stats = []
+            print("Trial: {}".format(j+1))
             for i in range(1,depth+1):
+                print("Depth: {}".format(i))
                 self.mini.limit = i
                 start = datetime.datetime.now()
                 catch = self.mini.getMove(self.board.copy())

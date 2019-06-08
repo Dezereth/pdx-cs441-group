@@ -61,7 +61,6 @@ class node:
 
 class MonteCarlo():
     def __init__(self, ucb_constant=1):
-        print("Monte-Carlo placeholder")
         self.root = None
         self.ucb_constant = ucb_constant
         self.eps = 0.9
@@ -71,7 +70,7 @@ class MonteCarlo():
         self.root = None
         self.epsilon = self.eps
 
-    def search(self, starting_state, time_limit, color):
+    def search(self, starting_state, time_limit, color, debug=False):
         #main alogirithm, begins a search from a starting state given a time limit
         self.epsilon = 0.9
         self.root = node(starting_state, None, root=True, color = color)
@@ -92,19 +91,22 @@ class MonteCarlo():
             #back propogate the results up to the orginal starting node
             self.backprop(leaf, sim_result)
             count += 1
-        print(f"Looped {count} times")
+        if debug:
+            print(f"Looped {count} times")
         #once time is up, return the the child node with the greatest evaluation based on the upper confidence bound
-        for child in self.root.children:
-            print("{0:.4f}%: {1:.4f} out of {2} for {3}".format((100*child.wins/child.simulations), child.wins, child.simulations, child.state)) #max(child.simulations for child in self.root.children)
+        if debug:
+            for child in self.root.children:
+                print("{0:.4f}%: {1:.4f} out of {2} for {3}".format((100*child.wins/child.simulations), child.wins, child.simulations, child.state)) #max(child.simulations for child in self.root.children)
         mx = -100
         best_move = None
         for child in self.root.children:
             if child.simulations > mx:
                 best_move = child.move
                 mx = child.simulations
-        print(f"The current best move is {best_move}")
-        plt.plot(depth_plot)
-        plt.show()
+        if debug:
+            print(f"The current best move is {best_move}")
+            plt.plot(depth_plot)
+            plt.show()
         return best_move
 
     def select_child(self, node):
@@ -217,7 +219,8 @@ class MonteCarlo():
 
 if __name__== '__main__':
     agent = MonteCarlo(1)
-    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black")
+    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black", debug=True)
+    print("second")
     agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white")
     #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',5,"black")
     #agent.epsilon=0.9
