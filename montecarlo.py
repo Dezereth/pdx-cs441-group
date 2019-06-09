@@ -80,7 +80,7 @@ class MonteCarlo():
         end = time.time()+time_limit
         depth_plot = []
         while time.time()<=end:
-            #decreases the values that favor exploration
+            #decrease the values that favor exploration
             if count % 40 == 0:
                 if self.epsilon > 0.1:
                     self.epsilon -= .1
@@ -198,14 +198,14 @@ class MonteCarlo():
             if white == '1':
                 node.wins += 0
             elif white == '0':
-                node.wins += 3
+                node.wins += 1
             else:
                 node.wins += float(black)
         elif node.color == 'black':
             if black == '1':
                 node.wins += 0
             elif black == '0':
-                node.wins += 3
+                node.wins += 1
             else:
                 node.wins += float(white)
 
@@ -219,7 +219,7 @@ class MonteCarlo():
         return True
 
 if __name__== '__main__':
-    agent = MonteCarlo(1)
+    agent = MonteCarlo()
     agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black", debug=True)
     agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white", debug=True )
     #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',5,"black")
