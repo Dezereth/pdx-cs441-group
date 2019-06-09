@@ -60,7 +60,7 @@ class node:
 
 
 class MonteCarlo():
-    def __init__(self, ucb_constant=1):
+    def __init__(self, ucb_constant=10):
         self.root = None
         self.ucb_constant = ucb_constant
         self.eps = 0.9
@@ -80,9 +80,12 @@ class MonteCarlo():
         end = time.time()+time_limit
         depth_plot = []
         while time.time()<=end:
+            #decreases the values that favor exploration
             if count % 40 == 0:
                 if self.epsilon > 0.1:
                     self.epsilon -= .1
+                if self.ucb_constant > 1:
+                    self.ucb_constant -= 1
             #select a leaf
             leaf = self.select_child(self.root)
             depth_plot.append(leaf.depth)
@@ -133,7 +136,7 @@ class MonteCarlo():
         while not node.is_terminal and count < 10/self.epsilon:
             if node.children == []:
                 node.expand_children()
-            if random.random() < self.eps:
+            if random.random() < self.epsilon:
                 node = random.choice(node.children)
             else:
                 node = max(node.children, key=attrgetter('ucb'))
@@ -193,14 +196,14 @@ class MonteCarlo():
             return
         if node.color == 'white':
             if white == '1':
-                node.wins -= 0
+                node.wins += 0
             elif white == '0':
                 node.wins += 3
             else:
                 node.wins += float(black)
         elif node.color == 'black':
             if black == '1':
-                node.wins -= 0
+                node.wins += 0
             elif black == '0':
                 node.wins += 3
             else:
