@@ -133,7 +133,7 @@ class MonteCarlo():
         while not node.is_terminal and count < 10/self.epsilon:
             if node.children == []:
                 node.expand_children()
-            if random.random() < self.epsilon:
+            if random.random() < self.eps:
                 node = random.choice(node.children)
             else:
                 node = max(node.children, key=attrgetter('ucb'))
@@ -188,21 +188,19 @@ class MonteCarlo():
         #print(result)
         node.simulations += 1
         [white,black] = result.split("-")
-        if node.state == '6r1/7K/8/k1p5/8/8/5P2/8 w - - 0 2':
-            print(result)
         if white == black:
             node.wins += .5
             return
         if node.color == 'white':
             if white == '1':
-                node.wins -= 3
+                node.wins -= 0
             elif white == '0':
                 node.wins += 3
             else:
                 node.wins += float(black)
         elif node.color == 'black':
             if black == '1':
-                node.wins -= 3
+                node.wins -= 0
             elif black == '0':
                 node.wins += 3
             else:
@@ -220,11 +218,11 @@ class MonteCarlo():
 if __name__== '__main__':
     agent = MonteCarlo(1)
     agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black", debug=True)
-    print("second")
-    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white")
+    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white", debug=True )
     #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',5,"black")
     #agent.epsilon=0.9
-    #agent.search('4k3/R7/8/8/7R/8/8/4K3 w - - 0 1',5,"white")
+    #agent.search('4k3/R7/8/8/7R/8/8/4K3 w - - 0 1',15,"white", debug=True)
+    #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',15,"black", debug=True)
     #agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
     #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',20,"white")
 
