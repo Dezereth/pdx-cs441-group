@@ -56,12 +56,12 @@ class Handler():
         self.board.push(catch)
         return catch
     
-    def miniVmonte(self, maxTurns=30, rounds=1, event="mini vs monte"):
+    def miniVmonte(self, maxTurns=30, rounds=1, event="Mini_vs_Monte"):
         """
         Starts a competetive game between Mini and Monte, with Mini moving first
         """
         games = []
-        fileStr = "Mini_vs_Monte_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
+        fileStr = event+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
@@ -88,12 +88,12 @@ class Handler():
             games.append(game)
         return games
 
-    def monteVmini(self, maxTurns=30, rounds=1, event="monte vs mini"):
+    def monteVmini(self, maxTurns=30, rounds=1, event="Monte_vs_Mini"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
         games = []
-        fileStr = "Mini_vs_Monte_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
+        fileStr = event+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
@@ -101,7 +101,7 @@ class Handler():
             game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="Montecarlo"
             game.headers["Black"]="MiniMax"
-            game.headers["Round"]=rounds
+            game.headers["Round"]=rnd+1
             game.headers["FEN"]=self.board.fen()
             turns = 0
             node = game
@@ -120,12 +120,12 @@ class Handler():
             games.append(game)
         return games
     
-    def miniVmini(self, maxTurns=30, rounds=1, event="mini vs mini"):
+    def miniVmini(self, maxTurns=30, rounds=1, event="Mini_vs_Mini"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
         games = []
-        fileStr = "Mini_vs_Monte_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
+        fileStr = event+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
@@ -133,7 +133,7 @@ class Handler():
             game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="MiniMax"
             game.headers["Black"]="MiniMax"
-            game.headers["Round"]=rounds
+            game.headers["Round"]=rnd+1
             game.headers["FEN"]=self.board.fen()
             turns = 0
             node = game
@@ -152,12 +152,12 @@ class Handler():
             games.append(game)
         return games
     
-    def monteVmonte(self, maxTurns=30, rounds=1, event="monte vs monte"):
+    def monteVmonte(self, maxTurns=30, rounds=1, event="Monte_vs_Monte"):
         """
         Starts a competetive game between Mini and Monte, with Monte moving first
         """
         games = []
-        fileStr = "Mini_vs_Monte_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
+        fileStr = event+"_"+datetime.datetime.now().strftime("%Y%m%d-%H%M")+".pgn"
         for rnd in range(rounds):
             self.board = self.starting.copy()
             game = chess.pgn.Game()
@@ -165,7 +165,7 @@ class Handler():
             game.headers["Date"]=datetime.datetime.now().strftime("%Y.%m.%d")
             game.headers["White"]="MonteCarlo"
             game.headers["Black"]="Montecarlo"
-            game.headers["Round"]=rounds
+            game.headers["Round"]=rnd+1
             game.headers["FEN"]=self.board.fen()
             turns = 0
             node = game
@@ -218,6 +218,10 @@ def main():
     monte = montecarlo.MonteCarlo()
     minim = minimax.MiniMax(limit=6)
 
+    me = miniEvaluator()
+    me.evaluate(depth=6, trials=1)
+    
+    
 #King-Rook-Pawn game
     #boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
     #handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
@@ -226,10 +230,10 @@ def main():
     #handy.monteVmini(maxTurns=25, rounds=5)
 
 #King-Rook-Rook game
-    boardKRR=chess.Board('rkr5/8/8/8/8/8/8/5RKR w - - 0 1')
-    handy = Handler(mini=minim, monte=monte, board=boardKRR.copy())
-    handy.adjMonte(time=120)
-    handy.miniVmonte(maxTurns=25, rounds=5, event="Mini vs Monte RKR")
+#    boardKRR=chess.Board('rkr5/8/8/8/8/8/8/5RKR w - - 0 1')
+#    handy = Handler(mini=minim, monte=monte, board=boardKRR.copy())
+#    handy.adjMonte(time=120)
+#    handy.miniVmonte(maxTurns=25, rounds=5, event="Mini vs Monte RKR")
     #handy.monteVmini(maxTurns=25, rounds=5, event="Monte vs Mini RKR")
 
 #Regular game
@@ -256,8 +260,6 @@ def main():
     handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BN Hunt")
 """
 
-    #me = miniEvaluator()
-    #me.evaluate(depth=7, trials=1)
 
 #%%
 def pgnTest():
