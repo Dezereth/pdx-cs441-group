@@ -217,19 +217,23 @@ class miniEvaluator():
 def main():
     monte = montecarlo.MonteCarlo()
     minim = minimax.MiniMax(limit=6)
-
-#King-Rook-Pawn game
     #boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
-    #handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
-    #handy.adjMonte(time=120)
-    #handy.miniVmonte(maxTurns=25, rounds=5)
-    #handy.monteVmini(maxTurns=25, rounds=5)
+    #eval = miniEvaluator(minim, boardKRP)
+    #eval.evaluate()
+
+    
+#King-Rook-Pawn game
+    boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
+    handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
+    handy.adjMonte(time=120)
+    handy.miniVmonte(maxTurns=25, rounds=5)
+    handy.monteVmini(maxTurns=25, rounds=5)
 
 #King-Rook-Rook game
-    boardKRR=chess.Board('rkr5/8/8/8/8/8/8/5RKR w - - 0 1')
-    handy = Handler(mini=minim, monte=monte, board=boardKRR.copy())
-    handy.adjMonte(time=120)
-    handy.miniVmonte(maxTurns=25, rounds=5, event="Mini vs Monte RKR")
+    #boardKRR=chess.Board('rkr5/8/8/8/8/8/8/5RKR w - - 0 1')
+    #handy = Handler(mini=minim, monte=monte, board=boardKRR.copy())
+    #handy.adjMonte(time=120)
+    #handy.miniVmonte(maxTurns=25, rounds=5, event="Mini vs Monte RKR")
     #handy.monteVmini(maxTurns=25, rounds=5, event="Monte vs Mini RKR")
 
 #Regular game

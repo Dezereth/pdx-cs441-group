@@ -60,7 +60,7 @@ class node:
 
 
 class MonteCarlo():
-    def __init__(self, ucb_constant=1):
+    def __init__(self, ucb_constant=10):
         self.root = None
         self.ucb_constant = ucb_constant
         self.eps = 0.9
@@ -80,9 +80,12 @@ class MonteCarlo():
         end = time.time()+time_limit
         depth_plot = []
         while time.time()<=end:
+            #decrease the values that favor exploartion 
             if count % 40 == 0:
                 if self.epsilon > 0.1:
                     self.epsilon -= .1
+                if self.ucb_constant > 1:
+                    self.ucb_constant -= 1
             #select a leaf
             leaf = self.select_child(self.root)
             depth_plot.append(leaf.depth)
@@ -188,23 +191,24 @@ class MonteCarlo():
         #print(result)
         node.simulations += 1
         [white,black] = result.split("-")
-        if node.state == '6r1/7K/8/k1p5/8/8/5P2/8 w - - 0 2':
-            print(result)
+        if white == '1' or black == '1':
+            pass
+            #print(result)
         if white == black:
             node.wins += .5
             return
         if node.color == 'white':
             if white == '1':
-                node.wins -= 3
+                node.wins += 0
             elif white == '0':
-                node.wins += 3
+                node.wins += 1
             else:
                 node.wins += float(black)
         elif node.color == 'black':
             if black == '1':
-                node.wins -= 3
+                node.wins += 0
             elif black == '0':
-                node.wins += 3
+                node.wins += 1
             else:
                 node.wins += float(white)
 
@@ -219,12 +223,12 @@ class MonteCarlo():
 
 if __name__== '__main__':
     agent = MonteCarlo(1)
-    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black", debug=True)
-    print("second")
-    agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white")
-    #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',5,"black")
+    #agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 b - - 0 1',10,"black", debug=True)
+    #print("second")
+    #agent.search('6R1/8/7K/k1p5/6r1/8/5P2/8 w - - 0 1',10,"white", debug)
+    #agent.search('4k3/8/8/8/7r/8/r7/4K3 b - - 0 1',50,"black", debug=True)
     #agent.epsilon=0.9
-    #agent.search('4k3/R7/8/8/7R/8/8/4K3 w - - 0 1',5,"white")
-    #agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white")
+    #agent.search('4k3/R7/8/8/7R/8/8/4K3 w - - 0 1',50,"white", debug=True)
+    agent.search("2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1",60,"white", debug=True)
     #agent.search('4k3/8/8/8/8/8/8/R2K3R w - - 0 1',20,"white")
 
