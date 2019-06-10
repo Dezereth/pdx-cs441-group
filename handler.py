@@ -52,7 +52,11 @@ class Handler():
         Queries the MiniMax search for the best move on the current board.
         Catches and pushes move, updating the board.
         """
-        catch = self.mini.getMove(self.board.copy())
+        errors = 0
+        catch = None
+        while not isinstance(catch, chess.Move) and errors < 5:
+            catch = self.mini.getMove(self.board.copy())
+            errors += 1
         self.board.push(catch)
         return catch
     
@@ -216,17 +220,17 @@ class miniEvaluator():
 
 def main():
     monte = montecarlo.MonteCarlo()
-    minim = minimax.MiniMax(limit=6)
+    minim = minimax.MiniMax(limit=5)
 
-    me = miniEvaluator()
-    me.evaluate(depth=6, trials=1)
+    #me = miniEvaluator()
+    #me.evaluate(depth=6, trials=1)
     
     
 #King-Rook-Pawn game
-    #boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
-    #handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
-    #handy.adjMonte(time=120)
-    #handy.miniVmonte(maxTurns=25, rounds=5)
+    boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
+    handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
+    handy.adjMonte(time=120)
+    handy.miniVmonte(maxTurns=10, rounds=1)
     #handy.monteVmini(maxTurns=25, rounds=5)
 
 #King-Rook-Rook game
