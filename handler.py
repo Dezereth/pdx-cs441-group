@@ -18,6 +18,7 @@ import chess.pgn
 import montecarlo
 import minimax
 import datetime
+import random
 
 #%%
 
@@ -41,7 +42,7 @@ class Handler():
         catches and pushes move, updating the board.
         """
         #search(self, starting_state, time_limit, color):
-        catch = self.monte.search(starting_state=self.board.fen(), time_limit=self.time, color='white' if self.board.turn else 'black')
+        catch = self.monte.search(starting_state=self.board.fen(), time_limit=self.time, color='white' if self.board.turn else 'black', debug=True)
         self.board.push_san(catch)
         catch = self.board.pop()
         self.board.push(catch)
@@ -52,13 +53,19 @@ class Handler():
         Queries the MiniMax search for the best move on the current board.
         Catches and pushes move, updating the board.
         """
-        errors = 0
         catch = None
-        while not isinstance(catch, chess.Move) and errors < 5:
-            catch = self.mini.getMove(self.board.copy())
-            errors += 1
+        catch = self.mini.getMove(self.board.copy())
+        if not isinstance(catch, chess.Move):
+            catch = self.miniBugWorkaround()
         self.board.push(catch)
         return catch
+    
+    def miniBugWorkaround(self):
+        moves = []
+        for i in self.board.legal_moves:
+            moves.append(i)
+        random.shuffle(moves)
+        return moves[0]
     
     def miniVmonte(self, maxTurns=30, rounds=1, event="Mini_vs_Monte"):
         """
@@ -227,10 +234,10 @@ def main():
     
     
 #King-Rook-Pawn game
-    boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
-    handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
-    handy.adjMonte(time=120)
-    handy.miniVmonte(maxTurns=10, rounds=1)
+    #boardKRP=chess.Board('2kr4/2p5/8/8/8/8/5P2/4RK2 w - - 0 1')
+    #handy = Handler(mini=minim, monte=monte, board=boardKRP.copy())
+    #handy.adjMonte(time=120)
+    #handy.miniVmonte(maxTurns=10, rounds=1)
     #handy.monteVmini(maxTurns=25, rounds=5)
 
 #King-Rook-Rook game
@@ -248,21 +255,21 @@ def main():
     #handy.monteVmini(maxTurns=75, rounds=1)
 
 #Hunter games
-"""
+
     boardHunt1=chess.Board('2k5/8/8/8/8/8/8/R2K3R w - - 0 1')
-    boardHunt2=chess.Board('2k5/8/8/8/8/8/8/B2K3R w - - 0 1')
-    boardHunt3=chess.Board('2k5/8/8/8/8/8/8/B2K3N w - - 0 1')
-    handy = Handler(mini=minim, monte=monte, board=boardHunt1.copy())
-    handy.adjMonte(time=120)
-    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte 2R Hunt")
-    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini 2R Hunt")
-    handy.starting = boardHunt2.copy()
-    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BR Hunt")
-    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BR Hunt")
-    handy.starting = boardHunt3.copy()
-    handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BN Hunt")
-    handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BN Hunt")
-"""
+    #boardHunt2=chess.Board('2k5/8/8/8/8/8/8/B2K3R w - - 0 1')
+    #boardHunt3=chess.Board('2k5/8/8/8/8/8/8/B2K3N w - - 0 1')
+    #handy = Handler(mini=minim, monte=monte, board=boardHunt1.copy())
+    #handy.adjMonte(time=120)
+    #handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte 2R Hunt")
+    #handy.monteVmini(maxTurns=15, rounds=1, event="Monte vs Mini 2R Hunt")
+    #handy.starting = boardHunt2.copy()
+    #handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BR Hunt")
+    #handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BR Hunt")
+    #handy.starting = boardHunt3.copy()
+    #handy.miniVmonte(maxTurns=15, rounds=5, event="Mini vs Monte BN Hunt")
+    #handy.monteVmini(maxTurns=15, rounds=5, event="Monte vs Mini BN Hunt")
+
 
 
 #%%

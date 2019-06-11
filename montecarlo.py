@@ -198,14 +198,14 @@ class MonteCarlo():
             if white == '1':
                 node.wins += 0
             elif white == '0':
-                node.wins += 1
+                node.wins += 3
             else:
                 node.wins += float(black)
         elif node.color == 'black':
             if black == '1':
                 node.wins += 0
             elif black == '0':
-                node.wins += 1
+                node.wins += 3
             else:
                 node.wins += float(white)
 
