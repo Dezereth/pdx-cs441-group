@@ -1,0 +1,55 @@
+[Event "Mini vs Monte BR Hunt"]
+[Site "?"]
+[Date "2019.06.09"]
+[Round "1"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/B2K3R w - - 0 1"]
+
+1. Be5 Kb7 2. Rh7+ Ka8 3. Kd2 *
+
+[Event "Mini vs Monte BR Hunt"]
+[Site "?"]
+[Date "2019.06.09"]
+[Round "2"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/B2K3R w - - 0 1"]
+
+1. Ke1 Kb8 2. Rh7 Ka8 3. Be5 *
+
+[Event "Mini vs Monte BR Hunt"]
+[Site "?"]
+[Date "2019.06.09"]
+[Round "3"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/B2K3R w - - 0 1"]
+
+1. Rf1 Kc7 2. Bb2 Kc6 3. Ba3 Kb7 4. Rg1 Kc8 5. Kc1 Kd8 6. Bf8 Ke8 7. Ba3 Kd7 8. Rf1 Ke6 9. Rf8 Ke5 10. Rb8 Kd5 11. Kb1 Kc6 12. Rc8+ Kd7 13. Bb4 Kxc8 *
+
+[Event "Mini vs Monte BR Hunt"]
+[Site "?"]
+[Date "2019.06.09"]
+[Round "4"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/B2K3R w - - 0 1"]
+
+1. Rh4 Kc7 2. Rh1 Kd7 3. Bc3 Kd8 4. Be1 Ke7 5. Bf2 Ke6 6. Ke2 Kd7 7. Kd1 Ke6 8. Be1 Kd5 9. Kc1 Kd4 10. Bg3 Kd5 11. Kc2 Ke4 12. Rg1 Kf3 13. Kb2 Ke2 14. Kb3 Kf3 15. Bc7 Kf2 *
+
+[Event "Mini vs Monte BR Hunt"]
+[Site "?"]
+[Date "2019.06.09"]
+[Round "5"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/B2K3R w - - 0 1"]
+
+1. Kd2 Kd8 2. Kd3 Ke7 3. Rg1 Kf7 4. Kc3 Kf6 5. Rd1 Kg7 6. Kd4 Kf8 7. Ke5 Kg8 8. Ke6 Kh7 9. Kf5 Kg8 10. Rd8+ Kf7 11. Bf6 *
+

@@ -1,0 +1,55 @@
+[Event "Mini vs Monte RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "1"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rf7 Rc4 2. Rh5 Ra7 3. Kf2 Ra2+ 4. Kf3 Ra3+ 5. Kf2 Rg3 6. Rb5+ Kc8 7. Ra5 Ra3 8. Rxa3 Rc7 9. Ra2 Rxf7+ 10. Kg1 Kb7 11. Ra4 Kc8 12. Ra5 Rc7 13. Ra1 Rf7 14. Ra5 Rc7 15. Ra4 Rc2 16. Ra5 Kb7 17. Ra2 Rxa2 18. Kh1 Ra8 19. Kg1 Rb8 20. Kh2 Rh8+ 21. Kg2 Kc7 22. Kg1 Rb8 23. Kg2 Kc6 24. Kf2 Kc7 25. Ke2 Ra8 *
+
+[Event "Mini vs Monte RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "2"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rh7 Rc7 2. Rd1 Rxh7 3. Rd8+ Ka7 4. Rxa8+ Kxa8 5. Kf1 Ra7 6. Ke2 Kb8 7. Kf1 Rh7 8. Ke2 Ka8 9. Kf2 Rh6 10. Kf3 Rd6 11. Ke2 Rb6 12. Kf1 Kb8 13. Kf2 Kb7 14. Kg3 Rc6 15. Kg4 Kc8 16. Kg5 Rc2 17. Kh4 Rc7 18. Kh5 Kd7 19. Kh6 Rc4 20. Kg7 Ke7 21. Kh6 Ra4 22. Kg6 Ke8 23. Kh7 Kf8 24. Kh6 Ra6+ 25. Kg5 Ra1 *
+
+[Event "Mini vs Monte RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "3"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rh7 Ra3 2. Rd1 Re8 3. Kf2 Ra8 4. Rh2 Rc8 5. Kg1 Ka7 6. Rb2 Rc6 7. Rb5 Rd8 8. Rb3 Rh8 9. Ra1+ Ra6 10. Kf2 Rxa1 11. Rg3 Ra2+ 12. Kg1 Rc8 13. Rg7+ Kb6 14. Rg2 Rxg2+ 15. Kxg2 Rc4 16. Kh3 Rc8 17. Kg2 Kb7 18. Kf2 Ka6 19. Kf3 Kb7 20. Kf4 Kc7 21. Kg4 Kc6 22. Kh5 Kb5 23. Kg5 Rc7 24. Kf5 Rc5+ 25. Kg4 Rc8 *
+
+[Event "Mini vs Monte RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "4"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rh5 Rc7 2. Rh7 Rxh7 3. Rf8+ Ka7 4. Rxa8+ Kxa8 5. Kf2 Rh5 6. Ke1 Ra5 7. Kd1 Ka7 8. Kd2 Rg5 9. Ke3 Rg7 10. Kf2 Rg5 11. Ke1 Ka6 12. Kf1 Rh5 13. Kg1 Rh6 14. Kf1 Rh4 15. Ke1 Rh6 16. Kd1 Kb5 17. Ke1 Ka6 18. Ke2 Kb6 19. Kd3 Kb7 20. Kc2 Rh3 21. Kd1 Kc6 22. Kc2 Kb5 23. Kd1 Rd3+ 24. Ke1 Rf3 25. Kd1 Rf4 *
+
+[Event "Mini vs Monte RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "5"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Re1 Rg8+ 2. Kh2 Ra7 3. Re8+ Rxe8 4. Re1 Re4 5. Rxe4 Ra6 6. Rf4 Ra5 7. Kh1 Ra1+ 8. Rf1 Rxf1+ 9. Kg2 Rd1 10. Kh3 Kc8 11. Kg3 Rd5 12. Kg2 Rd4 13. Kf2 Rd1 14. Ke2 Rc1 15. Kd2 Rc7 16. Ke2 Rh7 17. Kf2 Rf7+ 18. Ke3 Rc7 19. Ke4 Rg7 20. Kd5 Kb8 21. Ke6 Ra7 22. Ke5 Ra2 23. Kd4 Rg2 24. Kd3 Rb2 25. Kc3 Rb7 *
+

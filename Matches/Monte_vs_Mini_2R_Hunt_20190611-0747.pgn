@@ -1,0 +1,55 @@
+[Event "Monte vs Mini 2R Hunt"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "1"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/R2K3R w - - 0 1"]
+
+1. Re1 Kb7 2. Re4 Kc8 3. Ra7 Kd8 4. Re2 Kc8 5. Re8# *
+
+[Event "Monte vs Mini 2R Hunt"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "2"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/R2K3R w - - 0 1"]
+
+1. Ra7 Kd8 2. Rh8# *
+
+[Event "Monte vs Mini 2R Hunt"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "3"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/R2K3R w - - 0 1"]
+
+1. Rg1 Kb7 2. Ra6 Kxa6 3. Ke2 Kb6 4. Kf2 Kc6 5. Kg3 Kc5 6. Rb1 Kc6 7. Rb3 Kd5 8. Rb1 Kc4 9. Kg4 Kd4 10. Ra1 Ke5 11. Kg3 Kd6 12. Kg2 Ke5 13. Kh2 Ke4 14. Ra5 Kd4 15. Kg2 Ke3 *
+
+[Event "Monte vs Mini 2R Hunt"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "4"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/R2K3R w - - 0 1"]
+
+1. Kc2 Kb7 2. Rh5 Kc6 3. Kb3 Kb6 4. Rah1 Kb7 5. Rc1 Ka6 6. Re5 Kb6 7. Ree1 Kb7 8. Re5 Ka6 9. Rd1 Kb6 10. Ree1 Kb7 11. Rd7+ Kc6 12. Kc4 Kxd7 13. Rd1+ Kc8 14. Re1 Kb7 15. Rc1 Ka6 *
+
+[Event "Monte vs Mini 2R Hunt"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "5"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "2k5/8/8/8/8/8/8/R2K3R w - - 0 1"]
+
+1. Rh6 Kc7 2. Ra7+ Kc8 3. Rh8# *
+

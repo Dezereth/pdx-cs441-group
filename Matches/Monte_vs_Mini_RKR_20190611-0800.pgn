@@ -1,0 +1,55 @@
+[Event "Monte vs Mini RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "1"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rh7 Ra6 2. Rhf7 Ra7 3. Rxa7 Rc1 4. Rg7 Rxf1+ 5. Kxf1 Kc8 6. Rg8+ Kb7 7. Rg1 Ka7 8. Rg4 Ka8 9. Rg3 Kb8 10. Kg1 Ka8 11. Rg2 Kb7 12. Kf1 Kb6 13. Rh2 Kc5 14. Ra2 Kb4 15. Ra8 Kb5 16. Ra2 Kb4 17. Rd2 Ka4 18. Rd7 Kb5 19. Rd5+ Ka4 20. Re5 Kb3 21. Re8 Ka3 22. Ke1 Kb3 23. Rh8 Kb2 24. Re8 Kc2 25. Ke2 Kb1 *
+
+[Event "Monte vs Mini RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "2"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rc1 Ra1 2. Rxa1 Kb7 3. Kg2 Kc6 4. Ra2 Re8 5. Ra4 Kd5 6. Rg1 Rg8+ 7. Kh1 Rxg1+ 8. Kxg1 Ke5 9. Ra3 Kf5 10. Ra2 Kf4 11. Kf1 Kf3 12. Rf2+ Kg3 13. Rc2 Kf4 14. Rf2+ Ke3 15. Rc2 Kf3 16. Rc7 Kg3 17. Ra7 Kf3 18. Ra1 Ke4 19. Ra7 Kd5 20. Rg7 Ke4 21. Rh7 Kf4 22. Rb7 Kf5 23. Rb2 Kg6 24. Rb3 Kh5 25. Ke1 Kg4 *
+
+[Event "Monte vs Mini RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "3"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Kf2 Rc4 2. Rh5 Ra3 3. Rb1+ Ka8 4. Kf1 Rf4+ 5. Ke2 Rb3 6. Ke1 Kb8 7. Rh6 Rf1+ 8. Kxf1 Rxb1+ 9. Kf2 Ka8 10. Rh7 Rb8 11. Rh2 Rb2+ 12. Kg1 Rb1+ 13. Kf2 Rb2+ 14. Kg3 Rxh2 15. Kxh2 *
+
+[Event "Monte vs Mini RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "4"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rf6 Rc5 2. Re6 Rc2 3. Re4 Ra1+ 4. Re1 Rxe1# *
+
+[Event "Monte vs Mini RKR"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "5"]
+[White "Montecarlo"]
+[Black "MiniMax"]
+[Result "*"]
+[FEN "rkr5/8/8/8/8/8/8/5RKR w - - 0 1"]
+
+1. Rf2 Rc2 2. Rxc2 Ra1+ 3. Kg2 Rxh1 4. Rc6 Rh6 5. Rxh6 Ka8 6. Kg3 Kb7 7. Rh4 Ka8 8. Kf4 Ka7 9. Rg4 Kb7 10. Ke4 Kc8 11. Kd5 Kb8 12. Kc5 Ka7 13. Re4 Kb8 14. Kc6 Ka8 15. Rc4 Kb8 16. Rc1 Kc8 17. Rc2 Kd8 18. Rc5 Ke7 19. Rb5 Kf6 20. Kd7 Kf7 21. Rb7 Kg6 22. Rb5 Kf7 23. Rb2 Kg6 24. Ke7 Kg7 25. Rb6 Kg8 *
+

@@ -1,0 +1,11 @@
+[Event "Mini_vs_Monte"]
+[Site "?"]
+[Date "2019.06.11"]
+[Round "1"]
+[White "MiniMax"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"]
+
+1. e3 Nc6 2. Na3 Nb4 3. Bc4 Rb8 4. Qf3 d5 5. h3 dxc4 6. Qxb7 Rxb7 7. g4 Bd7 8. c3 Bxg4 9. cxb4 g6 10. hxg4 Rxb4 11. Nf3 Nf6 12. Rh3 Bg7 13. Ng1 Rxb2 14. Rxh7 Qb8 15. Rxh8+ Bxh8 16. Bxb2 Qxb2 17. Rb1 Qxa2 18. Rb8+ Kd7 19. g5 Qxa3 20. Nf3 c5 21. Ke2 c3 22. Rb7+ Kd8 23. Rxa7 Qxa7 24. gxf6 cxd2 25. fxe7+ Kxe7 26. Nd4 Qa1 27. Kxd2 Qb2+ 28. Ke1 Qc1+ 29. Ke2 cxd4 30. exd4 Qh1 31. Kd2 Kd6 32. Ke3 Qg1 33. Kd3 Bxd4 34. Kxd4 Ke6 35. Kc5 Qg5+ 36. Kd4 Ke7 37. Kc4 Qg1 38. Kb3 Qxf2 39. Kb4 f6 40. Ka3 Qb6 41. Ka4 Qa7+ 42. Kb3 Ke6 43. Kc3 Qg7 44. Kc2 g5 45. Kb2 Ke5 46. Kb3 Ke6 47. Ka2 Ke5 48. Ka3 Qd7 49. Kb4 Qd3 50. Ka5 Qg6 51. Kb6 Ke4 52. Kb5 Qh5 53. Kc4 f5 54. Kc3 Qe8 55. Kb2 Kd4 56. Ka1 Qb5 57. Ka2 Qe5 58. Ka3 Qd6+ 59. Kb3 Qe5 60. Kc2 Qe8 61. Kd2 Qd8 62. Kc1 Kc3 63. Kb1 Qf8 64. Ka1 Qb8 65. Ka2 Qb2# *
+
