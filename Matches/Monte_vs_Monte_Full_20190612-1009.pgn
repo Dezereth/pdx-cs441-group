@@ -1,0 +1,11 @@
+[Event "Monte_vs_Monte_Full"]
+[Site "?"]
+[Date "2019.06.12"]
+[Round "1"]
+[White "MonteCarlo"]
+[Black "Montecarlo"]
+[Result "*"]
+[FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"]
+
+1. d3 f6 2. f3 b5 3. c3 a6 4. e4 h5 5. Ne2 g6 6. e5 Nc6 7. f4 Rh6 8. f5 Nxe5 9. Ng3 Bg7 10. Bxh6 Nxh6 11. fxg6 Rb8 12. Rg1 Rb6 13. Qd2 Nxg6 14. Qxh6 Bxh6 15. b4 h4 16. Be2 hxg3 17. d4 Rb7 18. hxg3 Bf8 19. Bxb5 axb5 20. a3 f5 21. Kd2 Bg7 22. c4 Bf6 23. Kc3 Bxd4+ 24. Kb3 Bxa1 25. Nc3 bxc4+ 26. Ka2 Bxc3 27. g4 Rb5 28. g5 c5 29. Rf1 Rxb4 30. Rd1 Ne5 31. Rg1 Rb3 32. Rh1 Ba6 33. Rh5 Qa8 34. Rh2 Nd3 35. Rh8+ Bxh8 36. g6 Nc1# *
+
